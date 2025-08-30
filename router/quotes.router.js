@@ -1,0 +1,10 @@
+import {saveInBulk,listOfAll,rondomQuote,moodBaseQuote,QouteCategory,qouteByCategory} from"../controller/qoute.controller.js";
+import express from"express";
+const router = express.Router();
+router.post("/saveInBulk",saveInBulk);
+router.get("/list",listOfAll);
+router.get("/rondomQuote",rondomQuote);
+router.post("/moodbaseQuote",moodBaseQuote);
+router.get("/QouteCategory",QouteCategory);
+router.get("/quoteByCategory",qouteByCategory);
+export default router;

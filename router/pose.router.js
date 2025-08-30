@@ -1,0 +1,14 @@
+import {createPose, deletePose, updatePose,list,searchPose, rondomPose,typeOfPose,fatchPose} from "../controller/pose.controller.js";
+import express from "express";
+import multer from "multer";
+const router = express.Router();
+const upload = multer({dest : "public/pose"});
+router.post("/create",upload.single("image"),createPose);
+router.get("/list",list);
+router.get("/search/:id",searchPose);
+router.get("/get/:id",fatchPose);
+router.put("/:id",updatePose);
+router.delete("/:id",deletePose);
+router.get("/rondom",rondomPose);
+router.get("/typeOfPose",typeOfPose);
+export default router;
