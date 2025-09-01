@@ -8,22 +8,47 @@ import dotenv from"dotenv";
 dotenv.config();
 
 // create user api 
-export const create = async(request,response,next)=>{
-    try{
-        let error = validationResult(request);
-        if(!error.isEmpty())
-        return response.status(400).json({mesage :  "bad requiest",err : error.array()})
-        let {name,email,password,role}  = request.body;
-        let salt = bcrypt.genSaltSync(12);
-        password = bcrypt.hashSync(password,salt);
-        let user = await User.create({name,email,password,role});
-        await sendEmail(email,name);
-        return response.status(200).json({message : "user created"});
-    }catch(err){
-        console.log(err);
-        return response.status(500).json("internal server error");
+export const create = async (request, response, next) => {
+  try {
+    let error = validationResult(request);
+    if (!error.isEmpty()) {
+      return response
+        .status(400)
+        .json({ message: "Bad request", err: error.array() });
     }
-}
+
+    let { name, email, password, role } = request.body;
+
+    // ✅ Default role = user if not provided
+    if (!role) {
+      role = "user";
+    }
+
+    // ✅ Hash password
+    let salt = bcrypt.genSaltSync(12);
+    password = bcrypt.hashSync(password, salt);
+
+    // ✅ Create user but keep isVerified = false
+    let user = await User.create({
+      name,
+      email,
+      password,
+      role,
+      isVerified: false, // default until email verification
+    });
+
+    // ✅ Send verification email
+    await sendEmail(email, name);
+
+    return response
+      .status(200)
+      .json({ message: "Signup successful! Please check your email for verification." });
+  } catch (err) {
+    console.log(err);
+    return response.status(500).json("Internal server error");
+  }
+};
+
 
 export const verifyAccount = async(request,response,next)=>{
     try{

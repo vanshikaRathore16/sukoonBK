@@ -22,7 +22,7 @@ export const create = async (request, response, next) => {
         $lt: tomorrow,
       },
     });
-
+    
     if (exitUser) {
       return response.status(409).json({ message: "Plan already exists for today" });
     }

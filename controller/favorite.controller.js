@@ -9,7 +9,7 @@ export const addtofav = async(request,response,next)=>{
       console.log(itemId + " " + itemType+" "+userId)
       let user = await Favorite.findOne({userId,itemId,itemType});
       if(user)
-        return response.status(404).json({message : "added"});
+        return response.status(200).json({message : "already added in favrite"});
         let fav = await Favorite.create({userId,itemId,itemType});
         return response.status(200).json({message : "added in fav",fav});
     }catch(err){

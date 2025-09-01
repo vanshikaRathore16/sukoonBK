@@ -4,7 +4,7 @@ import { Pose } from "../model/pose.model.js";
 import { query } from "express-validator";
 // insert pose in model
 const typeofpose = [
-   {type : "Library", image : "https://www.gaiam.com/cdn/shop/articles/30_600x.jpg?v=1552935053"},
+   {type : "Library", image : "https://media.istockphoto.com/id/2213080347/photo/3d-character-girl-practicing-yoga.webp?a=1&b=1&s=612x612&w=0&k=20&c=l-MPTxN06vjMwqMYyFNCUmDscGjQGD7vygCwLOAFQvA="},
    {type : "pose by type " ,image : "https://static.vecteezy.com/system/resources/previews/008/251/852/non_2x/woman-in-yoga-poses-illustration-in-cartoon-style-vector.jpg"},
    {type : "begginers", image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaih5pLzTR5kBnp9o9i4L8DN_5fCtPUTGwzw&s"},
    {type : "healing pose", image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRikwFWr9Olz8UbKA2Q8M8j5fEho64GeAEf-g&s"}
@@ -120,7 +120,7 @@ export const fatchPose = async(request,response,next)=>{
       let {id } = request.params;
       console.log("Pose ID received:", id);
       let pose = await Pose.findById(id);
-      return response.status(200).json( pose);
+      return response.status(200).json(pose);
     }catch(err){
         console.log(err);
         return response.status(500).json({err : "internal server error"});

@@ -15,7 +15,7 @@ export const create = async(request,response,next)=>{
 export const approveFeedback = async (req, res) => {
   try {
       const _id = req.params.id;
-    const update = await Feedback.findByIdAndUpdate( _id, { isApprove: true });
+    const update = await Feedback.findByIdAndUpdate( _id, { isApprove: true }).limit(3);
      if (!update) {
       return res.status(404).json({ message: "Feedback not found" });
     }

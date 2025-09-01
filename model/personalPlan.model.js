@@ -22,7 +22,7 @@ const personalPlanSchema = new mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : "pose"
         },
-         idCompleted:{
+        idCompleted:{
         type : Boolean,
         default : false
     },
